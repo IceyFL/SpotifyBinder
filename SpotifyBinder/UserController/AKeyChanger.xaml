@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="SpotifyBinder.UserController.AKeyChanger"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             mc:Ignorable="d"
+             d:DesignHeight="40"
+             d:DesignWidth="335"
+             Height="40">
+    <UserControl.Resources>
+        <Style x:Key="NoHoverButtonStyle" TargetType="Button">
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="Foreground" Value="{x:Null}"/>
+            <Setter Property="BorderBrush" Value="{x:Null}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Border Background="#00191919"
+                BorderBrush="#001E1E1E"
+                BorderThickness="2"
+                CornerRadius="5"
+                Margin="0,0,0,0">
+            <Grid>
+                <Label x:Name="Title"
+                       Foreground="White"
+                       Content="Keyboard Activation Press"
+                       FontFamily="/AimmyWPF;component/Fonts/#Atkinson Hyperlegible"
+                       VerticalContentAlignment="Center"
+                       Padding="10,0,0,0"
+                       FontSize="13"
+                       Margin="0,0,115,0" />
+                <Border Background="#001E1E1E"
+                        BorderBrush="#50FFFFFF"
+                        BorderThickness="1"
+                        Width="70"
+                        HorizontalAlignment="Right"
+                        Margin="0,4,5,4"
+                        Name="Box"
+                        CornerRadius="3">
+                    <Label x:Name="KeyNotifier"
+                           Foreground="White"
+                           Content="Right"
+                           FontFamily="/AimmyWPF;component/Fonts/#Atkinson Hyperlegible"
+                           VerticalContentAlignment="Center"
+                           Padding="0,0"
+                           FontSize="12"
+                           Margin="0"
+                           HorizontalContentAlignment="Center" />
+                </Border>
+            </Grid>
+        </Border>
+        <Button x:Name="Reader"
+                        Height="Auto"
+                        Background="Transparent"
+                        BorderBrush="{x:Null}"
+                        Foreground="{x:Null}"
+                        Margin="0,0,0,0"
+                Style="{StaticResource NoHoverButtonStyle}"
+                        ></Button>
+    </Grid>
+</UserControl>

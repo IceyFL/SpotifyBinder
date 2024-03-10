@@ -1,0 +1,105 @@
+﻿<Window x:Class="SpotifyBinder.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        WindowStyle="None"
+        ResizeMode="CanMinimize"
+        WindowStartupLocation="CenterScreen"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Title="SpotifyBinder" Height="450" Width="800">
+    <Window.Resources>
+        <Style x:Key="NoHoverEffect" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                        BorderThickness="1"
+                        Padding="10,10" 
+                        CornerRadius="3" 
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Border Background="White"
+                CornerRadius="5,5,5,5"
+                BorderBrush="Transparent"
+                BorderThickness="2"
+                MouseLeftButtonDown="Border_MouseLeftButtonDown"
+                MouseMove="MainBorder_MouseMove"
+                Name="MainBorder">
+
+            <Grid>
+                <Border Name="RotatingBorder">
+                    <Border.Background>
+                        <LinearGradientBrush>
+                            <!-- Add RotateTransform here -->
+                            <LinearGradientBrush.RelativeTransform>
+                                <RotateTransform x:Name="GradientRotation" CenterX="0.5" CenterY="0.5" Angle="0"/>
+                            </LinearGradientBrush.RelativeTransform>
+                            <GradientStop Color="#FFFFFF" Offset="0"/>
+                            <GradientStop Color="#00FFFFFF" Offset="0.3"/>
+                            <GradientStop Color="#0f0333" Offset="1.05"/>
+                        </LinearGradientBrush>
+                    </Border.Background>
+                </Border>
+                <Grid VerticalAlignment="Top"
+                      Height="40">
+                    <Label Content="SpotifyBinder" FontWeight="Bold" Foreground="#0f0333"/>
+                    <Button x:Name="Exit"
+                            Style="{StaticResource NoHoverEffect}"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}"
+                            Padding="10,0"
+                            BorderThickness="0,0,0,0"
+                            Content="&#xE8BB;"
+                            FontFamily="Segoe MDL2 Assets"
+                            HorizontalAlignment="Right"
+                            Margin="10,0,0,0"
+                            Foreground="White"
+                            Height="Auto"
+                            FontSize="10"
+                            Click="Exit_Click" />
+                    <Button x:Name="Minimize"
+                            Style="{StaticResource NoHoverEffect}"
+                            Background="{x:Null}"
+                            BorderBrush="{x:Null}"
+                            Padding="10,0"
+                            BorderThickness="0,0,0,0"
+                            Content="&#xE921;"
+                            FontFamily="Segoe MDL2 Assets"
+                            HorizontalAlignment="Right"
+                            Foreground="White"
+                            Height="Auto"
+                            FontSize="10"
+                            Margin="0,0,30,0"
+                            Click="Minimize_Click" />
+                </Grid>
+            </Grid>
+        </Border>
+        <Grid Margin="20,40,20,15">
+            <Border Background="#555f5383" CornerRadius="10" MouseMove="MainBorder_MouseMove"/>
+            <ScrollViewer Margin="15,15,380,10" MouseMove="MainBorder_MouseMove"
+             VerticalScrollBarVisibility="Hidden" PanningMode="VerticalOnly">
+                <StackPanel x:Name="ItemScroller">
+
+                </StackPanel>
+            </ScrollViewer>
+            <ScrollViewer Margin="380,15,15,10" MouseMove="MainBorder_MouseMove"
+             VerticalScrollBarVisibility="Hidden" PanningMode="VerticalOnly">
+                <StackPanel x:Name="ItemScroller2">
+
+                </StackPanel>
+            </ScrollViewer>
+        </Grid>
+    </Grid>
+</Window>

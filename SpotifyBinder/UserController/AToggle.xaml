@@ -1,0 +1,104 @@
+﻿<UserControl x:Class="SpotifyBinder.UserController.AToggle"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             mc:Ignorable="d"
+             d:DesignHeight="40"
+             d:DesignWidth="335"
+             Height="40">
+    <UserControl.Resources>
+        <!-- CheckBox style -->
+        <Style TargetType="{x:Type CheckBox}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type CheckBox}">
+                        <Grid Background="Transparent" SnapsToDevicePixels="True" Height="18">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="34" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid x:Name="markGrid">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="Auto"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Rectangle Fill="Transparent" Height="16" x:Name="moveEllipse">
+                                    <Rectangle.Style>
+                                        <Style TargetType="Rectangle">
+                                            <Style.Triggers>
+                                                <DataTrigger Binding="{Binding IsChecked, RelativeSource={RelativeSource TemplatedParent}}" Value="True">
+                                                    <DataTrigger.EnterActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation From="0" To="16" Duration="0:0:0.4" Storyboard.TargetProperty="Width" />
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </DataTrigger.EnterActions>
+                                                    <DataTrigger.ExitActions>
+                                                        <BeginStoryboard>
+                                                            <Storyboard>
+                                                                <DoubleAnimation To="0" Duration="0:0:0.4" Storyboard.TargetProperty="Width"/>
+                                                            </Storyboard>
+                                                        </BeginStoryboard>
+                                                    </DataTrigger.ExitActions>
+                                                </DataTrigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Rectangle.Style>
+                                </Rectangle>
+                                <Rectangle RadiusX="9" RadiusY="9" Grid.ColumnSpan="2" Name="line" StrokeThickness=".8" IsHitTestVisible="False" Margin="0,0,0,0">
+                                    <Rectangle.Style>
+                                        <Style TargetType="{x:Type Rectangle}">
+                                            <Setter Property="Fill" Value="#FF191919"/>
+                                        </Style>
+                                    </Rectangle.Style>
+                                </Rectangle>
+                                <Border Name="ToggleBorder" Grid.ColumnSpan="2" BorderBrush="{Binding ToggleBorderColor, RelativeSource={RelativeSource AncestorType=UserControl}}" BorderThickness="2" CornerRadius="8" Background="Transparent" />
+                                <Ellipse Height="13" Width="13" StrokeThickness=".8" Name="spot" Grid.Column="1" HorizontalAlignment="Left" Margin="2.5,0,0,0">
+                                    <Ellipse.Style>
+                                        <Style TargetType="Ellipse">
+                                            <Setter Property="Fill" Value="White"/>
+                                        </Style>
+                                    </Ellipse.Style>
+                                </Ellipse>
+                            </Grid>
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" Grid.Column="1" ContentStringFormat="{TemplateBinding ContentStringFormat}" Focusable="False" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsChecked" Value="True">
+                                <Setter Property="Fill" TargetName="spot" Value="{Binding ToggleBorderColor, RelativeSource={RelativeSource AncestorType=UserControl}}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Border Background="#00191919"
+                BorderBrush="#001E1E1E"
+                BorderThickness="2"
+                CornerRadius="5"
+                Margin="0,0,0,10">
+            <Grid>
+                <Label x:Name="Title"
+                       Foreground="White"
+                       Content="Enable AI Aim Aligner"
+                       FontFamily="/AimmyWPF;component/Fonts/#Atkinson Hyperlegible"
+                       VerticalContentAlignment="Center"
+                       Padding="10,0,0,0"
+                       FontSize="13"
+                       Margin="0,0,47,0" />
+                <CheckBox x:Name="ToggleCheckBox" Content="" 
+                          Foreground="White" 
+                          FontFamily="/AimmyWPF;component/Fonts/#Atkinson Hyperlegible"
+                          VerticalContentAlignment="Center" Padding="10,0,0,0"
+                          FontSize="13" Margin="220,0,25,0"
+                          Checked="Reader_Click"
+                          Unchecked="Reader_Click"/>
+            </Grid>
+        </Border>
+    </Grid>
+</UserControl>
