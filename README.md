@@ -3,8 +3,8 @@ Allows you to add bindings to spotify features such as Play/Pause, Skip, Previou
 
 # Usage
 
-Simply run the exe, choose your settings and then click the minimize button to move it to the system tray.
-To close it you go to system tray, click the icon which will open the window again.    Then you click the X to close the application.
+Simply run the exe, choose your settings and then click the minimize button to move it to the system tray.  
+To close it you go to system tray, click the icon which will open the window again. Then you click the X to close the application.
 
 # Planned Updates
 
