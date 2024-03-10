@@ -1,4 +1,4 @@
-﻿using System.Drawing;
+using System.Drawing;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Forms;
@@ -22,6 +22,8 @@ namespace SpotifyBinder
         AKeyChanger PreviousKeyChanger;
         AKeyChanger PlayPauseKeyChanger;
 
+        bool StartMinimized = false;
+
         bool WinKey = false;
         bool CtrlKey = true;
         bool AltKey = true;
@@ -41,6 +43,7 @@ namespace SpotifyBinder
             InitializeNotifyIcon();
             try { LoadSettings(); } catch { }
             LoadUIElements();
+            if (StartMinimized) { this.WindowState = WindowState.Minimized; this.Hide(); }
 
             Change_Keysize(SkipKeyChanger, SkipKey);
             Change_Keysize(PreviousKeyChanger, PreviousKey);
@@ -154,6 +157,18 @@ namespace SpotifyBinder
                 ShftKeyToggle.ToggleCheckBox.IsChecked = true;
             }
 
+            AToggle StartMinimizedToggle = new("Start Minimized");
+            StartMinimizedToggle.ToggleCheckBox.Name = "StartMinimizedToggle";
+            StartMinimizedToggle.ToggleCheckBox.Click += (s, x) =>
+            {
+                StartMinimized = !StartMinimized;
+            };
+            ItemScroller.Children.Add(StartMinimizedToggle);
+            if (StartMinimized == true)
+            {
+                StartMinimizedToggle.ToggleCheckBox.IsChecked = true;
+            }
+
             SkipKeyChanger = new("Skip Key", SkipKey);
             SkipKeyChanger.Reader.Click += (s, x) =>
             {
@@ -254,7 +269,7 @@ namespace SpotifyBinder
 
         public void SaveSettings()
         {
-            string[] settings = new string[7];
+            string[] settings = new string[8];
             settings[0] = SkipKey;
             settings[1] = PreviousKey;
             settings[2] = PlayPauseKey;
@@ -262,6 +277,7 @@ namespace SpotifyBinder
             settings[4] = CtrlKey.ToString();
             settings[5] = AltKey.ToString();
             settings[6] = ShftKey.ToString();
+            settings[7] = StartMinimized.ToString();
             System.IO.File.WriteAllLines("settings.txt", settings);
         }
 
@@ -275,6 +291,7 @@ namespace SpotifyBinder
             CtrlKey = Convert.ToBoolean(settings[4]);
             AltKey = Convert.ToBoolean(settings[5]);
             ShftKey = Convert.ToBoolean(settings[6]);
+            StartMinimized = Convert.ToBoolean(settings[7]);
         }
 
         #endregion
